@@ -16,8 +16,6 @@ class AiStore:
             iv_df['price'] = price
 
 
-
-
         # if in 을 사용하기위해선 시리즈를 배열로 바꿔야할것 문서 참고
         # try 문사용 가능
         # 쿼리후 개수로 파악 가능
@@ -91,7 +89,7 @@ def manager_product():
 
 import json
 def products_counts():
-    pc_df = 1
+    pc_df = p_df.count('p_id')
     print(pc_df)
 
 if __name__ == '__main__':
