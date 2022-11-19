@@ -64,10 +64,9 @@ class Customer:
 
         return rat
 
-    def update(self, bank):
-        bank[self.c_id] = self.get_customer()
-        # for a_id in self.accounts.index:
-        #     a_df.loc[a_id] = self.accounts.loc[a_id]
+    def update(self, c_df,a_df):
+        print(c_df)
+        pass
 
     def get_name(self):
         return self.c_name

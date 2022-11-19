@@ -4,7 +4,6 @@ app = Flask(__name__)
 from bank import *
 from wtforms import Form, StringField, PasswordField, TextAreaField, validators
 
-
 class CaForm(Form):
     c_id = StringField('고객 아이디: ', [validators.length(max=20)])
     a_num = StringField('계좌 번호: ', [validators.length(max=20)])
@@ -18,7 +17,7 @@ def index():
         elif op == '1':
             return redirect(url_for('capage'))
         elif op == '2':
-            ~
+            return redirect(url_for('dwpage',c_id='Nan' ,a_num='Nan'))
         elif op == '3':
             return redirect(url_for('viewpage'))
 
@@ -49,17 +48,26 @@ def capage():
 
     return render_template('capage.html', form=form)
 @app.route("/dwpage/<c_id>/<a_num>", methods=['POST', 'GET'])
-def dwpage(c_id ='nan', a_num = 'nan'):
+def dwpage(c_id= 'Nan', a_num='Nan'):
+    form = CaForm(request.form)
     if request.method == 'POST':
-        # 고객 아이디, 계좌번호, 입출금 옵션, 입력금액 요청 폼에서 받아오기
-        # 고객 아이디로 고객인스턴스 생성
-        # 입출금 옵션이 입금이면 고객인스턴스에서 입금함수 실행 아니면 출금함수 실행
-        # 데이터 업데이트
-        ~
+        c_id = request.form['cId']          #1
+        a_num = request.form['aNum']        #2
+        op = request.form['option']         #3
+        amount = request.form['amount']     #4
+        customer = search_customer(c_id)    #5
+                                            #6
+        if op == '0' :      #입금
+            customer.add_amount(a_num,int(amount))
+        elif op == '1':     #출금
+            customer.sub_amount(a_num,int(amount))
+        update(customer)           #7
 
-        return redirect(url_for('index'))
-
-    return ~
+        # 1 , 2 계좌번호, 3 입출금 옵션, 4 입력금액 요청 폼에서 받아오기
+        # 5 고객 아이디로 고객인스턴스 생성
+        # 6 입출금 옵션이 입금이면 고객인스턴스에서 입금함수 실행 아니면 출금함수 실행
+        # 7 데이터 업데이트
+    return render_template('dwpage.html', c_id= c_id,a_num= a_num ,form=form)
 
 @app.route("/viewpage", methods=['POST', 'GET'])
 def viewpage():
