@@ -6,7 +6,7 @@ class Customer(Base):
     __tablename__ = 'customers'
     c_id = Column(String(20), primary_key=True)
     name = Column(String(50))
-    account_num = Column(String(20), unique=True)
+    account_num = Column(Integer)
     total_amount = Column(Integer)
     rat = Column(String(20))
 
@@ -25,7 +25,7 @@ class Customer(Base):
 class Accounts(Base):
     __tablename__ = 'accounts'
     a_id = Column(String(20), primary_key=True)
-    c_id = Column(String(20), unique = True,ForeignKey(Customer.c_id))
+    c_id = Column(String(20), ForeignKey(Customer.c_id))
     amount = Column(Integer)
     
     def __init__(self,a_id,c_id):
