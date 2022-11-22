@@ -2,6 +2,8 @@ import json
 import copy
 import sys
 
+import pandas as pd
+
 with open('bank4.json', 'r') as f:
     bank = json.load(f)
     print(bank)
@@ -25,7 +27,7 @@ class Customer:
         else:
             print('해당 계좌가 없습니다')
 
-    def sub_amount(self, a_id, amount):
+    def sub_amount(self, a_id: str, amount: int):
         if a_id in self.accounts:
             if self.accounts[a_id]['amount'] > amount:
                 self.accounts[a_id]['amount'] -= amount
@@ -36,7 +38,7 @@ class Customer:
         else:
             print('해당 계좌가 없습니다.')
 
-    def add_account(self, a_id):
+    def add_account(self, a_id: str):
         if a_id in self.accounts:
             print('해당 계좌가 이미 존재합니다')
         else:
@@ -64,7 +66,7 @@ class Customer:
 
         return rat
 
-    def update(self, c_df,a_df):
+    def update(self, c_df:pd.DataFrame,a_df:pd.DataFrame):
         print(c_df)
         pass
 
@@ -86,7 +88,7 @@ class Customer:
                 }
 
 
-def create_customer(c_id , c_name):
+def create_customer(c_id: str , c_name: str):
 
     customer = {'c_id': c_id, 'name': c_name,
                 'account_num': 0,
@@ -106,7 +108,7 @@ def show_list():
     print(result)
     return result
 
-def search_customer(c_id):
+def search_customer(c_id: str):
 
     if c_id in bank:
         customer = copy.copy(bank[c_id])
@@ -116,7 +118,7 @@ def search_customer(c_id):
         return None
 
 
-def show_customer(c_id):
+def show_customer(c_id: str):
 
     customer = search_customer(c_id)
     if customer is None:
