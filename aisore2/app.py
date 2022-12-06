@@ -50,6 +50,7 @@ def manage(s_id = 'nan'):
             ai_store =
             products =
             # 렌더링시 필요한 변수 할당해야 할것
+
             return render_template('manage.html',
                                     s_id = s_id,
                                     ~

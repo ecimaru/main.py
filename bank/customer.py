@@ -25,8 +25,9 @@ class Customer:
     def add_account(self, a_id,a_df):
         if a_id in self.accounts.index :
             print("해당 계좌가 이미 있습니다.")
+            pass
         else:
-            return None
+            pass
 
 
     def get_total_amount(self):
